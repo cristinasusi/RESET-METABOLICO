@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Metabólico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Arial Black', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF6B35 0%, #D32F2F 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B35 0%, #D32F2F 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .progress-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B35 0%, #FF8A50 100%);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .phase {
+            margin-bottom: 30px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            gap: 12px;
+        }
+
+        .phase-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D32F2F;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .phase-emoji {
+            font-size: 24px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            border-color: #FF6B35;
+            background: #FFF3E8;
+        }
+
+        .checklist-item.completed {
+            background: #FCE4D6;
+            border-color: #D32F2F;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #D32F2F;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .checklist-item.completed .item-title {
+            color: #D32F2F;
+        }
+
+        .checklist-item.completed .item-desc {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            border-left: 4px solid #ff9800;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .tip-box strong {
+            color: #ff9800;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset {
+            background: #e9ecef;
+            color: #666;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-reset:hover {
+            background: #dee2e6;
+            border-color: #FF6B35;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #FF6B35 0%, #D32F2F 100%);
+            color: white;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .footer {
+                display: none;
+            }
+            .checklist-item {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 22px;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 RESET METABÓLICO</h1>
+            <p>Tu checklist para disfrutar sin culpa</p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-text">
+                <span>Tu progreso hoy</span>
+                <span id="progress-text">0/9</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- FASE 1 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <span class="phase-emoji">🥗</span>
+                    <span class="phase-title">Paso 1: Base Fundamental</span>
+                </div>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Incluye alimentos apetecibles en tu dieta</div>
+                        <div class="item-desc">Incorpora esos alimentos que amas en tus comidas habituales. No es privación, es integración.</div>
+                    </div>
+                </label>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Planifica comidas con variedad</div>
+                        <div class="item-desc">Asegúrate de que cada comida tenga algo que realmente disfrutes, no solo lo saludable.</div>
+                    </div>
+                </label>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Acepta la satisfacción como meta</div>
+                        <div class="item-desc">Comer debe ser placentero. Si tu dieta es restrictiva, los antojos serán más intensos.</div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- FASE 2 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <span class="phase-emoji">💧</span>
+                    <span class="phase-title">Paso 2: Cuando Llega el Antojo</span>
+                </div>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Lo primero: bebe agua</div>
+                        <div class="item-desc">A menudo confundimos sed con hambre. Tómate un vaso de agua y espera 5-10 minutos.</div>
+                    </div>
+                </label>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Identifica el tipo de hambre</div>
+                        <div class="item-desc">¿Es hambre real (física) o psicológica (aburrimiento, estrés, emoción)? Pregúntate sinceramente.</div>
+                    </div>
+                </label>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Si es hambre psicológica, busca alternativa</div>
+                        <div class="item-desc">Paseo, música, llamada a un amigo, o simplemente esperar a que pase el impulso.</div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- FASE 3 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <span class="phase-emoji">🍪</span>
+                    <span class="phase-title">Paso 3: La Regla de la Porción</span>
+                </div>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Toma solo un trocito</div>
+                        <div class="item-desc">Si decides comer ese antojo, lo haces en porción pequeña. Un trocito satisface sin exceso.</div>
+                    </div>
+                </label>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Nunca cojas el paquete completo</div>
+                        <div class="item-desc">Sirve la porción en un plato. Guarda el resto. Así controlas consciente, no compulsivamente.</div>
+                    </div>
+                </label>
+
+                <label class="checklist-item">
+                    <input type="checkbox" class="checkbox" onchange="actualizarProgreso()">
+                    <div class="item-content">
+                        <div class="item-title">Come lentamente y disfruta</div>
+                        <div class="item-desc">Saborea cada bocado. La satisfacción llega cuando comes con atención, no velocidad.</div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- TIP BOX -->
+            <div class="tip-box">
+                <strong>💡 Recuerda:</strong>
+                No se trata de renunciar, sino de integrar. Comer un trocito de lo que amas con conciencia es más sano que privarse y después devorar en secreto. ¡Tú puedes! 💪
+            </div>
+
+            <!-- BOTONES -->
+            <div class="footer">
+                <button class="btn btn-reset" onclick="reiniciarChecklist()">🔄 Reiniciar</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function actualizarProgreso() {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            const marcados = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const porcentaje = (marcados / total) * 100;
+
+            document.getElementById('progress-fill').style.width = porcentaje + '%';
+            document.getElementById('progress-text').textContent = `${marcados}/${total}`;
+
+            checkboxes.forEach((cb) => {
+                const item = cb.closest('.checklist-item');
+                if (cb.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+            });
+        }
+
+        function reiniciarChecklist() {
+            document.querySelectorAll('.checkbox').forEach(cb => cb.checked = false);
+            actualizarProgreso();
+            alert('✨ ¡Checklist reiniciada para un nuevo día!');
+        }
+
+        // Guardar progreso en localStorage
+        document.querySelectorAll('.checkbox').forEach((cb, index) => {
+            cb.addEventListener('change', () => {
+                let estado = JSON.parse(localStorage.getItem('reset-metabolico') || '{}');
+                estado[index] = cb.checked;
+                localStorage.setItem('reset-metabolico', JSON.stringify(estado));
+            });
+        });
+
+        // Cargar progreso guardado
+        window.addEventListener('load', () => {
+            let estado = JSON.parse(localStorage.getItem('reset-metabolico') || '{}');
+            document.querySelectorAll('.checkbox').forEach((cb, index) => {
+                if (estado[index]) {
+                    cb.checked = true;
+                }
+            });
+            actualizarProgreso();
+        });
+    </script>
+</body>
+</html>
